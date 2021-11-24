@@ -2,7 +2,7 @@
 # 💻 ESP32-CHAT-COMMUNICATION-OVER-WIFI 
 The aim of the project is to build a chat system using two esp32 development boards. 
 
-![image2](https://raw.githubusercontent.com/Jviraj/Blog/main/assets/ESP%2032.png?token=AUGL3VZOHVUIV4PJJERGEUDBTZRS6)
+![image2](https://raw.githubusercontent.com/Jviraj/Blog/main/assets/ESP%2032.png?token=AUGL3V2SGK4WSY5ZSDWR2ILBTZTUC)
 
 <!-- ABOUT THE PROJECT -->
 ## 📃 About The Project
@@ -78,6 +78,8 @@ idf.py -p /dev/ttyUSB1 flash monitor
 
 
 ## 📄 Understanding Code
+### Base Mac Address
+![image_macadd](https://raw.githubusercontent.com/Jviraj/Blog/main/assets/mac_add.png?token=AUGL3V6EF67IR5WP754Z7ILBTZTO6)
 ### Console
 ```cpp
 void app_main(void)
@@ -231,8 +233,9 @@ void espnow_task_recv(void)
 ![image](https://github.com/Jviraj/Blog/blob/main/assets/code_flow.png)
 
 ## Conclusion
-* A max length of 250 bytes of data can be sent
+* The maximum length of data that can be sent is 250 bytes.
 * The mac address of the ESP32, to which the data is sent, is required in this example. The code can be modified such that we don't require it.
+* Encryption of data is yet to be added.
 * The range of `ESPNOW` is about 500m.
 
 ## Contributors
