@@ -1,5 +1,5 @@
 
-# 💻 ESP32-CHAT-COMMUNICATION-OVER-WIFI 
+# 💻 ESP32-CHAT-COMMUNICATION-OVER-ESPNOW
 The aim of the project is to build a chat system using two esp32 development boards. 
 
 ![image2](https://raw.githubusercontent.com/Jviraj/Blog/main/assets/ESP%2032.png?token=AUGL3V2SGK4WSY5ZSDWR2ILBTZTUC)
@@ -79,7 +79,10 @@ idf.py -p /dev/ttyUSB1 flash monitor
 
 ## 📄 Understanding Code
 ### Base Mac Address
+https://github.com/espressif/esp-idf/tree/master/examples/system/base_mac_address/main 
+On flashing the code, the console shows the derived MAC address of each network interface as such 
 ![image_macadd](https://raw.githubusercontent.com/Jviraj/Blog/main/assets/mac_add.png?token=AUGL3V6EF67IR5WP754Z7ILBTZTO6)
+
 ### Console
 ```cpp
 void app_main(void)
