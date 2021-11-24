@@ -2,7 +2,7 @@
 # 💻 ESP32-CHAT-COMMUNICATION-OVER-WIFI 
 The aim of the project is to build a chat system using two esp32 development boards. 
 
-![image2]()
+![image2](https://raw.githubusercontent.com/Jviraj/Blog/main/assets/ESP%2032.png?token=AUGL3VZOHVUIV4PJJERGEUDBTZRS6)
 
 <!-- ABOUT THE PROJECT -->
 ## 📃 About The Project
@@ -58,7 +58,7 @@ idf.py menuconfig
 * `ESP-NOW Configuration`
   * `Send len` - espnow packet length.
   
-![image1](https://raw.githubusercontent.com/RISHI27-dot/ESP32-chat-communication-over-wifi/testing1/assets/menuconfig.png)
+![image1](https://github.com/Jviraj/Blog/blob/main/assets/menuconfig.png)
 
 ### Build
 ```
@@ -228,7 +228,7 @@ void espnow_task_recv(void)
 ```
 
 ## Flowchart
-![image](https://user-images.githubusercontent.com/84721111/143261166-727c669e-8ca8-426c-9e57-3d32cc3d6582.png)
+![image](https://github.com/Jviraj/Blog/blob/main/assets/code_flow.png)
 
 ## Conclusion
 * A max length of 250 bytes of data can be sent
