@@ -79,13 +79,14 @@ idf.py -p /dev/ttyUSB1 flash monitor
 
 ## 📄 Understanding Code
 ### Base Mac Address
-https://github.com/espressif/esp-idf/tree/master/examples/system/base_mac_address/main 
+[Code](https://github.com/espressif/esp-idf/tree/master/examples/system/base_mac_address/main)
 
 On flashing the code, the console shows the derived MAC address of each network interface as such 
 
 ![image0](https://github.com/Jviraj/Blog/blob/main/assets/mac_add.png)
 
 ### Console
+In `app_main()`, we initialize nvs, initialize console and finally create `task_console`.
 ```cpp
 void app_main(void)
 {
@@ -120,6 +121,7 @@ void app_main(void)
     xTaskCreate(task_console, "task_console", 3000, NULL, 3, &console);
 } 
 ```
+In `task_console`
 ```cpp
 
 void task_console()
@@ -249,3 +251,6 @@ void espnow_task_recv(void)
 ## Contributors
 * [Viraj Jagdale](https://github.com/Jviraj)
 * [Rishikesh Donadkar](https://github.com/RISHI27-dot)
+
+## Git repository
+[ESP32-Chat-Communication-Over-wifi](https://github.com/RISHI27-dot/ESP32-chat-communication-over-wifi)
