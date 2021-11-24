@@ -236,7 +236,7 @@ void espnow_task_recv(void)
 }
 ```
 
-## Flowchart
+## 🧭 Flowchart
 ![image](https://github.com/Jviraj/Blog/blob/main/assets/code_flow.png)
 
 ## Result
