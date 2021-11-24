@@ -86,7 +86,7 @@ On flashing the code, the console shows the derived MAC address of each network 
 ![image0](https://github.com/Jviraj/Blog/blob/main/assets/mac_add.png)
 
 ### Console
-In `app_main()`, we initialize nvs, initialize console and finally create `task_console`.
+In `app_main()`, we initialize nvs, console and finally create `task_console`.
 ```cpp
 void app_main(void)
 {
@@ -121,7 +121,7 @@ void app_main(void)
     xTaskCreate(task_console, "task_console", 3000, NULL, 3, &console);
 } 
 ```
-In `task_console`
+In `task_console`, when the user inputs data, we suspend this task until the data is sent from our ESP.
 ```cpp
 
 void task_console()
@@ -195,7 +195,7 @@ void espnowinit(void)
 }
 ```
 
-This task is utilized to send data. The API used to send data is `esp_now_send()`
+This task is utilized to send data. The API used to send data is `esp_now_send()`.
 ```cpp
 static void espnow_task_send(void)
 {
@@ -214,7 +214,7 @@ void on_sent(const uint8_t *mac_addr, esp_now_send_status_t status)
 }
 ```
 
-The callback function `on_receive` is called when data is received. We create the task `espnow_task_recv()`.
+The callback function `on_receive()` is called when data is received. We create the task `espnow_task_recv()`. It receives MAC address, data and size of the data sent.
 ```cpp
 void on_receive(const uint8_t *mac_addr, const uint8_t *data, int len)
 {
@@ -240,7 +240,7 @@ void espnow_task_recv(void)
 ![image](https://github.com/Jviraj/Blog/blob/main/assets/code_flow.png)
 
 ## Result
-
+![**result gif**](https://github.com/Jviraj/Blog/blob/main/assets/result.gif)
 
 ## Conclusion
 * The maximum length of data that can be sent is 250 bytes.
