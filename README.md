@@ -1,9 +1,10 @@
 
 # 💻 ESP32-CHAT-COMMUNICATION-OVER-ESPNOW
-The aim of the project is to build a chat system using two esp32 development boards. 
 
-![image2](https://github.com/Jviraj/Blog/blob/main/assets/ESP32%20(2).png)
-
+<p align="center">
+<img src="https://github.com/Jviraj/Blog/blob/main/assets/ESP32%20(2).png"/>
+ </p>
+ 
 <!-- ABOUT THE PROJECT -->
 ## 📃 About The Project
 
@@ -57,9 +58,11 @@ idf.py menuconfig
   
 * `ESP-NOW Configuration`
   * `Send len` - espnow packet length.
-  
-![image1](https://github.com/Jviraj/Blog/blob/main/assets/menuconfig.png)
 
+<p align="center">
+<img src="https://github.com/Jviraj/Blog/blob/main/assets/menuconfig.png"/>
+ </p>
+ 
 ### Build
 ```
 idf.py build
@@ -83,10 +86,20 @@ idf.py -p /dev/ttyUSB1 flash monitor
 
 On flashing the code, the console shows the derived MAC address of each network interface as such 
 
-![image0](https://github.com/Jviraj/Blog/blob/main/assets/mac_add.png)
-
+<p align="center">
+<img src="https://github.com/Jviraj/Blog/blob/main/assets/mac_add.png"/>
+ </p>
+ 
 ### Console
-In `app_main()`, we initialize nvs, console and finally create `task_console`.
+ESP-IDF provides console component, which includes building blocks needed to develop an interactive console over serial port.This component is used in this project to create a frontend chat interface. It also includes followint properties:
+- Line editing, provided by linenoise library.
+- Scrolling through chat history. 
+- Accessing previous chats.
+- Tab auto-completion.
+
+
+In `app_main()`, we initialize nvs, filesyste and the console.A task is created to run the console and `task_console` is passed as the first argument. It is a	pointer to the task entry function that will execute the task.
+
 ```cpp
 void app_main(void)
 {
@@ -121,7 +134,7 @@ void app_main(void)
     xTaskCreate(task_console, "task_console", 3000, NULL, 3, &console);
 } 
 ```
-In `task_console`, when the user inputs data, we suspend this task until the data is sent from our ESP.
+The `task_console()` function.
 ```cpp
 
 void task_console()
@@ -163,7 +176,10 @@ void task_console()
 ```
 ### ESPNOW
 
-The function `espnowinit()` gets called in app main, which initializes wifi, espnow and to add peer.
+ESP-NOW is a protocol developed by Espressif, which enables multiple devices to communicate with one another without using Wi-Fi. The protocol is similar to the low-power 2.4GHz wireless connectivity that is often deployed in wireless mouses. So, the pairing between devices is needed prior to their communication. After the pairing is done, the connection is secure and peer-to-peer, with no handshake being required.
+
+The function `espnowinit()` gets called in app main, which makes the setup for espnow interconnection and to add peers to establish connection between them.
+
 ```cpp
 void espnowinit(void)
 {
@@ -195,7 +211,7 @@ void espnowinit(void)
 }
 ```
 
-This task is utilized to send data. The API used to send data is `esp_now_send()`.
+This task is utilized to send data. The function used to send data is `esp_now_send()`.
 ```cpp
 static void espnow_task_send(void)
 {
@@ -214,7 +230,7 @@ void on_sent(const uint8_t *mac_addr, esp_now_send_status_t status)
 }
 ```
 
-The callback function `on_receive()` is called when data is received. We create the task `espnow_task_recv()`. It receives MAC address, data and size of the data sent.
+The callback function `on_receive` is called when data is received. And the chat data is displayed on the console. It is done in a task which is created in this function. The function espnow_task_recv() executes this task.
 ```cpp
 void on_receive(const uint8_t *mac_addr, const uint8_t *data, int len)
 {
@@ -224,7 +240,7 @@ void on_receive(const uint8_t *mac_addr, const uint8_t *data, int len)
 }
 ```
 
-The task ,`espnow_task_recv()` has a higher priority so that interrupts the task console to display the received data.
+The task created previously with `espnow_task_recv()` as its execution function has a higher priority than the console task so it interrupts the task console to display the received data.
 ```cpp
 void espnow_task_recv(void)
 {
@@ -235,10 +251,14 @@ void espnow_task_recv(void)
     vTaskDelete(recv);
 }
 ```
+Once the chat data is displayed on the console, the user is prompted again for the next chat and the cycle repeats.
 
 ## 🧭 Flowchart
-![image](https://github.com/Jviraj/Blog/blob/main/assets/code_flow.png)
 
+<p align="center">
+<img src="https://github.com/Jviraj/Blog/blob/main/assets/code_flow.png"/>
+ </p>
+ 
 ## Result
 ![**result gif**](https://github.com/Jviraj/Blog/blob/main/assets/result.gif)
 
